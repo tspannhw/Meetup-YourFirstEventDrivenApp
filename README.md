@@ -31,8 +31,7 @@ select * from pulsar."meetup/newjersey"."first";
 
 select __key__, from_utf8(__value__), 
            __publish_time__, __message_id__,
-           __producer_name__,
-           __properties__ 
+           __producer_name__
 from pulsar."meetup/newjersey"."first"
 order by __publish_time__ desc;
 
