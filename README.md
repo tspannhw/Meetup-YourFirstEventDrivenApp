@@ -26,6 +26,14 @@ show catalogs;
 show schemas in pulsar;
 show tables in pulsar."meetup/newjersey";
 select * from pulsar."meetup/newjersey"."first";
+
+select __key__, from_utf8(__value__), __event_time__,
+           __publish_time__, __message_id__,
+           __producer_name__,
+           __properties__ 
+from pulsar."meetup/newjersey"."first"
+order by __event_time__ desc;
+
 exit;
 
 ````
@@ -60,3 +68,5 @@ bin/pulsar-admin tenants delete meetup
 
 * https://www.meetup.com/new-york-city-apache-pulsar-meetup/events/282270385/
 * https://streamnative.io/event/meetup-build-an-event-driven-architecture-with-apache-pulsar/
+* https://github.com/tspannhw/pulsar-adafruit-funhouse
+* https://github.com/tspannhw/ScyllaFLiPSTheStream
