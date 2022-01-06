@@ -65,9 +65,16 @@ bin/pulsar-admin tenants delete meetup
 
 ````
 
+### Web Pages For Viewing
+
+* http://pulsar1:8081/ui/
+* http://pulsar1:8080/admin/v2/persistent/meetup/newjersey
+* http://pulsar1:9527/#/management/topics/persistent/meetup/newjersey/first/topic?tab=storage&cluster=standalone
+
 ### References
 
 * https://www.meetup.com/new-york-city-apache-pulsar-meetup/events/282270385/
 * https://streamnative.io/event/meetup-build-an-event-driven-architecture-with-apache-pulsar/
 * https://github.com/tspannhw/pulsar-adafruit-funhouse
 * https://github.com/tspannhw/ScyllaFLiPSTheStream
+* https://github.com/apache/pulsar-manager
