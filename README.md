@@ -25,14 +25,16 @@ bin/pulsar sql
 show catalogs;
 show schemas in pulsar;
 show tables in pulsar."meetup/newjersey";
+describe pulsar."meetup/newjersey"."first";
+
 select * from pulsar."meetup/newjersey"."first";
 
-select __key__, from_utf8(__value__), __event_time__,
+select __key__, from_utf8(__value__), 
            __publish_time__, __message_id__,
            __producer_name__,
            __properties__ 
 from pulsar."meetup/newjersey"."first"
-order by __event_time__ desc;
+order by __publish_time__ desc;
 
 exit;
 
