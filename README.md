@@ -71,6 +71,83 @@ bin/pulsar-admin tenants delete meetup
 * http://pulsar1:8080/admin/v2/persistent/meetup/newjersey
 * http://pulsar1:9527/#/management/topics/persistent/meetup/newjersey/first/topic?tab=storage&cluster=standalone
 
+### Python Testing
+
+````
+import pulsar
+client = pulsar.Client('pulsar://localhost:6650')
+consumer = client.subscribe('persistent://meetup/newjersey/first',subscription_name='my-sub')
+while True:
+    msg = consumer.receive()
+    print("Received message: '%s'" % msg.data())
+    consumer.acknowledge(msg)
+client.close()
+
+import pulsar
+client = pulsar.Client('pulsar://localhost:6650')
+producer = client.create_producer('persistent://meetup/newjersey/first')
+producer.send(('Hi Meetup people' ).encode('utf-8'))
+client.close()
+
+import pulsar
+client = pulsar.Client('pulsar://localhost:6650')
+producer = client.create_producer('persistent://meetup/newjersey/first')
+producer.send(('Hi Meetup people' ).encode('utf-8'))
+client.close()
+
+bin/pulsar-client consume "persistent://meetup/newjersey/first" -s first-reader -n 0
+
+
+````
+
+### GoLang App
+
+````
+go get -u "github.com/apache/pulsar-client-go/pulsar"
+
+go build -o app produce.go
+
+package main
+
+import (
+        "log"
+        "time"
+        "fmt"
+        "context"
+        "github.com/apache/pulsar-client-go/pulsar"
+)
+
+func main() {
+
+        client, err := pulsar.NewClient(pulsar.ClientOptions{
+        URL:               "pulsar://localhost:6650",
+        OperationTimeout:  30 * time.Second,
+        ConnectionTimeout: 30 * time.Second,
+        })
+
+        if err != nil {
+                log.Fatal(err)
+        }
+
+        producer, err := client.CreateProducer(pulsar.ProducerOptions{
+                Topic: "persistent://meetup/newjersey/first",
+        })
+
+        _, err = producer.Send(context.Background(), &pulsar.ProducerMessage{
+    Payload: []byte("hello"),
+})
+
+defer producer.Close()
+
+if err != nil {
+    fmt.Println("Failed to publish message", err)
+}
+fmt.Println("Published message")
+
+
+}
+````
+
 ### References
 
 * https://www.meetup.com/new-york-city-apache-pulsar-meetup/events/282270385/
