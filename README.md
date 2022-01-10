@@ -78,3 +78,7 @@ bin/pulsar-admin tenants delete meetup
 * https://github.com/tspannhw/pulsar-adafruit-funhouse
 * https://github.com/tspannhw/ScyllaFLiPSTheStream
 * https://github.com/apache/pulsar-manager
+
+### For Ubuntu 18.04 on AMD65
+
+* go1.13.9.linux-amd64.tar.gz
